@@ -14,7 +14,10 @@ class ViewController: UIViewController, GMSMapViewDelegate {
     var mapView: GMSMapView?
     override func viewDidLoad() {
         super.viewDidLoad()
-        fancy = FancyGeo()
+        fancy = FancyGeo.sharedInstance()
+        FancyGeo.onMessageReceivedListener = ({(fence) in
+            print("message tapped", fence)
+        })
         let camera = GMSCameraPosition.camera(withLatitude: 37.422, longitude:-122.084, zoom: 12.0)
         self.mapView = GMSMapView.map(withFrame: CGRect.zero, camera: camera)
         self.view = mapView
@@ -27,7 +30,7 @@ class ViewController: UIViewController, GMSMapViewDelegate {
         marker.map = mapView
         mapView!.delegate = self;
         if(fancy?.hasPermission() ?? false){
-            mapView!.isMyLocationEnabled = true
+            self.mapView!.isMyLocationEnabled = true
         }
         let fences = fancy?.getAllFences() ?? []
         print("fences",fences.count)
@@ -60,10 +63,8 @@ class ViewController: UIViewController, GMSMapViewDelegate {
     }
     
     func mapView(_ mapView: GMSMapView, didLongPressAt coordinate: CLLocationCoordinate2D) {
-        print("long press", !fancy!.hasPermission())
         let hasPermission = fancy?.hasPermission() ?? false
         fancy?.hasNotificationsPermission(callback: { (hasNotificationPermission, notificationPermissionError) in
-            print("hasNotificationPermission", hasNotificationPermission, "notificationPermissionError", notificationPermissionError)
             if(hasNotificationPermission){
                 if !hasPermission {
                     self.fancy?.requestPermission(always: true, callback: { (hasPermission, error ) in
@@ -78,7 +79,6 @@ class ViewController: UIViewController, GMSMapViewDelegate {
                 }
             }else{
                 self.fancy?.requestNotificationsPermission(callback: { (has, e) in
-                    print("requesting", has,  "error", e)
                     if(has){
                         if !hasPermission {
                             self.fancy?.requestPermission(always: true, callback: { (hasPermission, error ) in

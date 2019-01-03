@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D5AA8DED8233673A77E8722E /* libPods-FancyGeoDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF5572BE7A17FA7A5EC3636 /* libPods-FancyGeoDemo.a */; };
 		F1D97E9421CC1C0F00819B74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D97E9321CC1C0F00819B74 /* AppDelegate.swift */; };
 		F1D97E9621CC1C0F00819B74 /* fa.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D97E9521CC1C0F00819B74 /* fa.swift */; };
 		F1D97E9921CC1C0F00819B74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1D97E9721CC1C0F00819B74 /* Main.storyboard */; };
@@ -15,6 +14,9 @@
 		F1D97E9E21CC1C1000819B74 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1D97E9C21CC1C1000819B74 /* LaunchScreen.storyboard */; };
 		F1D97EA921CC1C1000819B74 /* FancyGeoDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D97EA821CC1C1000819B74 /* FancyGeoDemoTests.swift */; };
 		F1D97EB421CC1C1000819B74 /* FancyGeoDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D97EB321CC1C1000819B74 /* FancyGeoDemoUITests.swift */; };
+		F1EC9DD521DEB755003BE727 /* FancyGeo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1EC9DD121DE6120003BE727 /* FancyGeo.framework */; };
+		F1EC9DD621DEB7A7003BE727 /* FancyGeo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1EC9DD121DE6120003BE727 /* FancyGeo.framework */; };
+		F1EC9DD721DEB7A7003BE727 /* FancyGeo.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F1EC9DD121DE6120003BE727 /* FancyGeo.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,21 +48,42 @@
 			remoteGlobalIDString = F1E37A6421C85ED4002B8E03;
 			remoteInfo = fancygeoTests;
 		};
-		F1EC9DC521DDC4F9003BE727 /* PBXContainerItemProxy */ = {
+		F1EC9DD021DE6120003BE727 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F1EC9DC021DDC4F8003BE727 /* FancyGeo.xcodeproj */;
+			containerPortal = F1EC9DCB21DE611F003BE727 /* FancyGeo.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = F1EC9D9921DDC338003BE727;
 			remoteInfo = FancyGeo;
 		};
-		F1EC9DC721DDC4F9003BE727 /* PBXContainerItemProxy */ = {
+		F1EC9DD221DE6120003BE727 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = F1EC9DC021DDC4F8003BE727 /* FancyGeo.xcodeproj */;
+			containerPortal = F1EC9DCB21DE611F003BE727 /* FancyGeo.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = F1EC9DA221DDC339003BE727;
 			remoteInfo = FancyGeoTests;
 		};
+		F1EC9DD821DEB7A7003BE727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1EC9DCB21DE611F003BE727 /* FancyGeo.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F1EC9D9821DDC338003BE727;
+			remoteInfo = FancyGeo;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F1EC9DDA21DEB7A7003BE727 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F1EC9DD721DEB7A7003BE727 /* FancyGeo.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		1DC09721FC5AA2B2CBFD7448 /* Pods-FancyGeoDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FancyGeoDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-FancyGeoDemo/Pods-FancyGeoDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -87,7 +110,7 @@
 		F1D97ECD21CC1D4100819B74 /* fancygeo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = fancygeo.xcodeproj; sourceTree = "<group>"; };
 		F1D97ED121CC1D4100819B74 /* fancygeoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fancygeoTests.swift; sourceTree = "<group>"; };
 		F1D97ED221CC1D4100819B74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F1EC9DC021DDC4F8003BE727 /* FancyGeo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FancyGeo.xcodeproj; path = ../FancyGeo/FancyGeo.xcodeproj; sourceTree = "<group>"; };
+		F1EC9DCB21DE611F003BE727 /* FancyGeo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FancyGeo.xcodeproj; path = ../Sources/FancyGeo.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +118,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5AA8DED8233673A77E8722E /* libPods-FancyGeoDemo.a in Frameworks */,
+				F1EC9DD621DEB7A7003BE727 /* FancyGeo.framework in Frameworks */,
+				F1EC9DD521DEB755003BE727 /* FancyGeo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,7 +152,7 @@
 		F1D97E8721CC1C0F00819B74 = {
 			isa = PBXGroup;
 			children = (
-				F1EC9DC021DDC4F8003BE727 /* FancyGeo.xcodeproj */,
+				F1EC9DCB21DE611F003BE727 /* FancyGeo.xcodeproj */,
 				F1D97E9221CC1C0F00819B74 /* FancyGeoDemo */,
 				F1D97EA721CC1C1000819B74 /* FancyGeoDemoTests */,
 				F1D97EB221CC1C1000819B74 /* FancyGeoDemoUITests */,
@@ -228,11 +252,11 @@
 			path = fancygeoTests;
 			sourceTree = "<group>";
 		};
-		F1EC9DC121DDC4F8003BE727 /* Products */ = {
+		F1EC9DCC21DE611F003BE727 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F1EC9DC621DDC4F9003BE727 /* FancyGeo.framework */,
-				F1EC9DC821DDC4F9003BE727 /* FancyGeoTests.xctest */,
+				F1EC9DD121DE6120003BE727 /* FancyGeo.framework */,
+				F1EC9DD321DE6120003BE727 /* FancyGeoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,10 +273,12 @@
 				F1D97E8D21CC1C0F00819B74 /* Frameworks */,
 				F1D97E8E21CC1C0F00819B74 /* Resources */,
 				F048FF36C84AF30575D43792 /* [CP] Copy Pods Resources */,
+				F1EC9DDA21DEB7A7003BE727 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F1EC9DD921DEB7A7003BE727 /* PBXTargetDependency */,
 			);
 			name = FancyGeoDemo;
 			productName = FancyGeoDemo;
@@ -307,6 +333,11 @@
 				TargetAttributes = {
 					F1D97E8F21CC1C0F00819B74 = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					F1D97EA321CC1C1000819B74 = {
 						CreatedOnToolsVersion = 10.1;
@@ -331,12 +362,12 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = F1EC9DC121DDC4F8003BE727 /* Products */;
-					ProjectRef = F1EC9DC021DDC4F8003BE727 /* FancyGeo.xcodeproj */;
-				},
-				{
 					ProductGroup = F1D97ECE21CC1D4100819B74 /* Products */;
 					ProjectRef = F1D97ECD21CC1D4100819B74 /* fancygeo.xcodeproj */;
+				},
+				{
+					ProductGroup = F1EC9DCC21DE611F003BE727 /* Products */;
+					ProjectRef = F1EC9DCB21DE611F003BE727 /* FancyGeo.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -363,18 +394,18 @@
 			remoteRef = F1D97ED721CC1D4100819B74 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F1EC9DC621DDC4F9003BE727 /* FancyGeo.framework */ = {
+		F1EC9DD121DE6120003BE727 /* FancyGeo.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = FancyGeo.framework;
-			remoteRef = F1EC9DC521DDC4F9003BE727 /* PBXContainerItemProxy */;
+			remoteRef = F1EC9DD021DE6120003BE727 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		F1EC9DC821DDC4F9003BE727 /* FancyGeoTests.xctest */ = {
+		F1EC9DD321DE6120003BE727 /* FancyGeoTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = FancyGeoTests.xctest;
-			remoteRef = F1EC9DC721DDC4F9003BE727 /* PBXContainerItemProxy */;
+			remoteRef = F1EC9DD221DE6120003BE727 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -493,6 +524,11 @@
 			isa = PBXTargetDependency;
 			target = F1D97E8F21CC1C0F00819B74 /* FancyGeoDemo */;
 			targetProxy = F1D97EB021CC1C1000819B74 /* PBXContainerItemProxy */;
+		};
+		F1EC9DD921DEB7A7003BE727 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FancyGeo;
+			targetProxy = F1EC9DD821DEB7A7003BE727 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -636,9 +672,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E30ED0908D52C57833BB5215 /* Pods-FancyGeoDemo.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TG7LSJHB64;
 				INFOPLIST_FILE = FancyGeoDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -656,9 +694,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1DC09721FC5AA2B2CBFD7448 /* Pods-FancyGeoDemo.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TG7LSJHB64;
 				INFOPLIST_FILE = FancyGeoDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

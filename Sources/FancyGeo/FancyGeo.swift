@@ -29,7 +29,7 @@
     
     @objc(FancyGeo)
     public class FancyGeo : NSObject, CLLocationManagerDelegate {
-        private var locationManager: CLLocationManager?
+        private static var manager: CLLocationManager?
         private var isGettingCurrentLocation: Bool = false
         typealias Codable = Encodable & Decodable
         public static let GEO_LOCATION_DATA: String = "FANCY_GEO_LOCATION_DATA"
@@ -38,9 +38,44 @@
         private static var managers: [String: CLLocationManager] = [:]
         private static var locationCallbacks:[String: (String?, String?) -> Void] = [:]
         private static var permissions:[String: FancyPermission] = [:]
-        private var PREFIX = "_fancy_geo_"
-        public static var onMessageReceivedListener: (() -> Void)?
+        private static var notificationTapped: String?
+        private static let PREFIX = "_fancy_geo_"
+        private static var instance: FancyGeo?
+        public static var onMessageReceivedListener: ((_ fence: String ) -> Void)?
+        private static func isActive() -> Bool {
+            return UIApplication.shared.applicationState == .active
+        }
         
+        @objc public static func handleNotification(center: UNUserNotificationCenter , response: UNNotificationResponse){
+            let id = response.notification.request.identifier
+            let defaults = UserDefaults.init(suiteName: FancyGeo.GEO_LOCATION_DATA)
+            if defaults != nil {
+                let fences =  defaults?.dictionaryRepresentation() ?? [:]
+                for fence in fences {
+                    if(fence.key.starts(with: FancyGeo.PREFIX)){
+                        let type = getType(json: fence.value as! String)
+                        switch(type){
+                        case "circle":
+                            let circle = CircleFence.fromString(json: fence.value as! String)
+                            if circle != nil && circle?.notification != nil{
+                                let notification = circle?.notification
+                                let notificationId = String(notification!.id)
+                                if(id.elementsEqual(notificationId)){
+                                    FancyGeo.notificationTapped = fence.value as? String
+                                }
+                            }
+                            break
+                        default:
+                            return
+                        }
+                    }
+                }
+            }
+            
+            if(isActive() && notificationTapped != nil){
+               onMessageReceivedListener?(notificationTapped!)
+            }
+        }
         
         @objc class FancyPermission: NSObject {
             public let always: Bool
@@ -60,9 +95,28 @@
             case ALL
         }
         
+        @objc public static func sharedInstance() -> FancyGeo {
+            setUpInstance()
+            return instance!
+        }
+        
+        private static func setUpInstance() {
+            if(instance == nil){
+                instance = FancyGeo()
+                if(manager == nil){
+                    manager = CLLocationManager()
+                    manager?.allowsBackgroundLocationUpdates = true
+                    manager?.delegate = instance;
+                }
+            }
+        }
+        
         @objc public static func initNotificationsDelegate(delegate: UNUserNotificationCenterDelegate){
             let center = UNUserNotificationCenter.current()
             center.delegate = delegate
+            if isActive() && notificationTapped != nil {
+                onMessageReceivedListener?(notificationTapped!)
+            }
         }
         
         @objc public class FenceNotification : NSObject, Codable {
@@ -237,11 +291,9 @@
             
         }
         
-        public override init() {
+        override init() {
             super.init()
             defaults = UserDefaults.init(suiteName: FancyGeo.GEO_LOCATION_DATA)
-            locationManager = CLLocationManager()
-            locationManager?.delegate = self;
         }
         
         @objc public func requestNotificationsPermission(callback: @escaping (Bool,String?) -> Void){
@@ -330,7 +382,7 @@
             let lat = CLLocationDegrees(points[0])
             let lon = CLLocationDegrees(points[1])
             let cordinates = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-            let maxRadius = locationManager?.maximumRegionMonitoringDistance ?? 0
+            let maxRadius = FancyGeo.manager?.maximumRegionMonitoringDistance ?? 0
             let inputRadius = CLLocationDistance(radius)
             let requestRadius = inputRadius > maxRadius ? maxRadius : inputRadius
             let circle = CircleFence.initWithIdTransitionCoordinatesRadiusLoiteringDelay(id: requestId, transition: transition, coordinates: points, radius: radius, loiteringDelay: loiteringDelay)
@@ -355,15 +407,14 @@
                 region.notifyOnExit = true;
             }
             
-            locationManager?.startMonitoring(for: region)
-            print("stuff", circle.toJson())
+            FancyGeo.manager?.startMonitoring(for: region)
             defaults?.set(circle.toJson(), forKey: makeKey(requestId))
             FancyGeo.callbacks[requestId] = onListener
         }
         
         
         private func makeKey(_ key: String) -> String{
-            return PREFIX + key
+            return FancyGeo.PREFIX + key
         }
         
         @objc public func getAllFences() -> NSArray{
@@ -372,7 +423,7 @@
                 let storedFences = defaults?.dictionaryRepresentation() ?? [:]
                 let keys = storedFences.keys
                 for key in keys {
-                    if(key.starts(with: PREFIX)){
+                    if(key.starts(with: FancyGeo.PREFIX)){
                         let fence = storedFences[key]
                         if(fence != nil){
                             fences.add(fence!)
@@ -385,27 +436,56 @@
         
         @objc public func getFence(id: String) -> String? {
             if(defaults != nil){
-                return defaults?.value(forKey: PREFIX + id) as? String
+                return defaults?.value(forKey: FancyGeo.PREFIX + id) as? String
             }
             return nil
         }
         
-        @objc public func removeFence(id: String, onListener: ( (_ id: String) ->Void)?){
+        @objc public func removeFence(id: String, callback : ( (_ id: String?, _ error: String?) ->Void)?){
             let manager = CLLocationManager()
-            print("remove", manager.monitoredRegions)
+            if(defaults != nil){
+                let fence =  getFence(id: id)
+                if(fence != nil){
+                    for region in manager.monitoredRegions {
+                        if(region.identifier.elementsEqual(id)){
+                            manager.stopMonitoring(for: region)
+                            defaults?.removeObject(forKey: makeKey(id))
+                            callback?(id,nil)
+                        }
+                    }
+                }else{
+                    callback?(nil, "Fence not found")
+                }
+            }else{
+                callback?(nil, "Unknown error")
+            }
         }
+        
         @objc public func removeAllFences() -> Void {
-            
+            let manager = CLLocationManager()
+            if(defaults != nil){
+                let storedFences = defaults?.dictionaryRepresentation() ?? [:]
+                let keys = storedFences.keys
+                for key in keys {
+                    if(key.starts(with: FancyGeo.PREFIX)){
+                        let fence = storedFences[key] as? String
+                        if(fence != nil){
+                            for region in manager.monitoredRegions {
+                                manager.stopMonitoring(for: region)
+                                defaults?.removeObject(forKey: key)
+                            }
+                        }
+                    }
+                }
+            }
         }
         
         func createNotification(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
             let center =  UNUserNotificationCenter.current()
-            print("createNotification", region.identifier)
             if(defaults != nil){
                 let fenceJson = getFence(id: region.identifier)
                 if(fenceJson != nil){
                     let fence = FancyGeo.getType(json: fenceJson!)
-                    print("fence", fence)
                     switch(fence){
                     case "circle":
                         let circle = CircleFence.fromString(json: fenceJson!)
@@ -430,7 +510,6 @@
             }
         }
         
-        
         public func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
             let requestCallback =  FancyGeo.callbacks[region.identifier]
             if requestCallback != nil{
@@ -439,7 +518,6 @@
         }
         
         public func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
-            print("monitoringDidFailFor")
             if(region != nil){
                 let requestCallback = FancyGeo.callbacks[region?.identifier ?? ""]
                 if requestCallback != nil{
