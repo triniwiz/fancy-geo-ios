@@ -1,0 +1,795 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D5AA8DED8233673A77E8722E /* libPods-FancyGeoDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF5572BE7A17FA7A5EC3636 /* libPods-FancyGeoDemo.a */; };
+		F1D97E9421CC1C0F00819B74 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D97E9321CC1C0F00819B74 /* AppDelegate.swift */; };
+		F1D97E9621CC1C0F00819B74 /* fa.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D97E9521CC1C0F00819B74 /* fa.swift */; };
+		F1D97E9921CC1C0F00819B74 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1D97E9721CC1C0F00819B74 /* Main.storyboard */; };
+		F1D97E9B21CC1C1000819B74 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F1D97E9A21CC1C1000819B74 /* Assets.xcassets */; };
+		F1D97E9E21CC1C1000819B74 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F1D97E9C21CC1C1000819B74 /* LaunchScreen.storyboard */; };
+		F1D97EA921CC1C1000819B74 /* FancyGeoDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D97EA821CC1C1000819B74 /* FancyGeoDemoTests.swift */; };
+		F1D97EB421CC1C1000819B74 /* FancyGeoDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1D97EB321CC1C1000819B74 /* FancyGeoDemoUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F1D97EA521CC1C1000819B74 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1D97E8821CC1C0F00819B74 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1D97E8F21CC1C0F00819B74;
+			remoteInfo = FancyGeoDemo;
+		};
+		F1D97EB021CC1C1000819B74 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1D97E8821CC1C0F00819B74 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F1D97E8F21CC1C0F00819B74;
+			remoteInfo = FancyGeoDemo;
+		};
+		F1D97ED521CC1D4100819B74 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1D97ECD21CC1D4100819B74 /* fancygeo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F1E37A5B21C85ED4002B8E03;
+			remoteInfo = fancygeo;
+		};
+		F1D97ED721CC1D4100819B74 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1D97ECD21CC1D4100819B74 /* fancygeo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F1E37A6421C85ED4002B8E03;
+			remoteInfo = fancygeoTests;
+		};
+		F1EC9DC521DDC4F9003BE727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1EC9DC021DDC4F8003BE727 /* FancyGeo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F1EC9D9921DDC338003BE727;
+			remoteInfo = FancyGeo;
+		};
+		F1EC9DC721DDC4F9003BE727 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F1EC9DC021DDC4F8003BE727 /* FancyGeo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F1EC9DA221DDC339003BE727;
+			remoteInfo = FancyGeoTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1DC09721FC5AA2B2CBFD7448 /* Pods-FancyGeoDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FancyGeoDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-FancyGeoDemo/Pods-FancyGeoDemo.release.xcconfig"; sourceTree = "<group>"; };
+		5AF5572BE7A17FA7A5EC3636 /* libPods-FancyGeoDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-FancyGeoDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E30ED0908D52C57833BB5215 /* Pods-FancyGeoDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FancyGeoDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FancyGeoDemo/Pods-FancyGeoDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		F1D97E9021CC1C0F00819B74 /* FancyGeoDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FancyGeoDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1D97E9321CC1C0F00819B74 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F1D97E9521CC1C0F00819B74 /* fa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fa.swift; sourceTree = "<group>"; };
+		F1D97E9821CC1C0F00819B74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F1D97E9A21CC1C1000819B74 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F1D97E9D21CC1C1000819B74 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		F1D97E9F21CC1C1000819B74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1D97EA421CC1C1000819B74 /* FancyGeoDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FancyGeoDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1D97EA821CC1C1000819B74 /* FancyGeoDemoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyGeoDemoTests.swift; sourceTree = "<group>"; };
+		F1D97EAA21CC1C1000819B74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1D97EAF21CC1C1000819B74 /* FancyGeoDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FancyGeoDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1D97EB321CC1C1000819B74 /* FancyGeoDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyGeoDemoUITests.swift; sourceTree = "<group>"; };
+		F1D97EB521CC1C1000819B74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1D97EC221CC1C2D00819B74 /* fancygeo */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fancygeo; path = ../fancygeo; sourceTree = "<group>"; };
+		F1D97EC421CC1CB700819B74 /* fancygeo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = fancygeo.framework; path = "../../../Library/Developer/Xcode/DerivedData/fancygeo-amfkahqdllmuprctmzvrmcmtyvix/Build/Products/Debug-iphonesimulator/fancygeo.framework"; sourceTree = "<group>"; };
+		F1D97ECA21CC1D4100819B74 /* fancygeo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fancygeo.h; sourceTree = "<group>"; };
+		F1D97ECB21CC1D4100819B74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1D97ECC21CC1D4100819B74 /* FancyGeo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FancyGeo.swift; sourceTree = "<group>"; };
+		F1D97ECD21CC1D4100819B74 /* fancygeo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = fancygeo.xcodeproj; sourceTree = "<group>"; };
+		F1D97ED121CC1D4100819B74 /* fancygeoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fancygeoTests.swift; sourceTree = "<group>"; };
+		F1D97ED221CC1D4100819B74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1EC9DC021DDC4F8003BE727 /* FancyGeo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = FancyGeo.xcodeproj; path = ../FancyGeo/FancyGeo.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F1D97E8D21CC1C0F00819B74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5AA8DED8233673A77E8722E /* libPods-FancyGeoDemo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1D97EA121CC1C1000819B74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1D97EAC21CC1C1000819B74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8366ADC98489FDFB060D0444 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E30ED0908D52C57833BB5215 /* Pods-FancyGeoDemo.debug.xcconfig */,
+				1DC09721FC5AA2B2CBFD7448 /* Pods-FancyGeoDemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F1D97E8721CC1C0F00819B74 = {
+			isa = PBXGroup;
+			children = (
+				F1EC9DC021DDC4F8003BE727 /* FancyGeo.xcodeproj */,
+				F1D97E9221CC1C0F00819B74 /* FancyGeoDemo */,
+				F1D97EA721CC1C1000819B74 /* FancyGeoDemoTests */,
+				F1D97EB221CC1C1000819B74 /* FancyGeoDemoUITests */,
+				F1D97E9121CC1C0F00819B74 /* Products */,
+				F1D97EC121CC1C2D00819B74 /* Frameworks */,
+				8366ADC98489FDFB060D0444 /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		F1D97E9121CC1C0F00819B74 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1D97E9021CC1C0F00819B74 /* FancyGeoDemo.app */,
+				F1D97EA421CC1C1000819B74 /* FancyGeoDemoTests.xctest */,
+				F1D97EAF21CC1C1000819B74 /* FancyGeoDemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1D97E9221CC1C0F00819B74 /* FancyGeoDemo */ = {
+			isa = PBXGroup;
+			children = (
+				F1D97E9321CC1C0F00819B74 /* AppDelegate.swift */,
+				F1D97E9521CC1C0F00819B74 /* fa.swift */,
+				F1D97E9721CC1C0F00819B74 /* Main.storyboard */,
+				F1D97E9A21CC1C1000819B74 /* Assets.xcassets */,
+				F1D97E9C21CC1C1000819B74 /* LaunchScreen.storyboard */,
+				F1D97E9F21CC1C1000819B74 /* Info.plist */,
+			);
+			path = FancyGeoDemo;
+			sourceTree = "<group>";
+		};
+		F1D97EA721CC1C1000819B74 /* FancyGeoDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				F1D97EA821CC1C1000819B74 /* FancyGeoDemoTests.swift */,
+				F1D97EAA21CC1C1000819B74 /* Info.plist */,
+			);
+			path = FancyGeoDemoTests;
+			sourceTree = "<group>";
+		};
+		F1D97EB221CC1C1000819B74 /* FancyGeoDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F1D97EB321CC1C1000819B74 /* FancyGeoDemoUITests.swift */,
+				F1D97EB521CC1C1000819B74 /* Info.plist */,
+			);
+			path = FancyGeoDemoUITests;
+			sourceTree = "<group>";
+		};
+		F1D97EC121CC1C2D00819B74 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F1D97EC821CC1D4100819B74 /* fancygeo */,
+				F1D97EC421CC1CB700819B74 /* fancygeo.framework */,
+				F1D97EC221CC1C2D00819B74 /* fancygeo */,
+				5AF5572BE7A17FA7A5EC3636 /* libPods-FancyGeoDemo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F1D97EC821CC1D4100819B74 /* fancygeo */ = {
+			isa = PBXGroup;
+			children = (
+				F1D97EC921CC1D4100819B74 /* fancygeo */,
+				F1D97ECD21CC1D4100819B74 /* fancygeo.xcodeproj */,
+				F1D97ED021CC1D4100819B74 /* fancygeoTests */,
+			);
+			path = fancygeo;
+			sourceTree = "<group>";
+		};
+		F1D97EC921CC1D4100819B74 /* fancygeo */ = {
+			isa = PBXGroup;
+			children = (
+				F1D97ECA21CC1D4100819B74 /* fancygeo.h */,
+				F1D97ECB21CC1D4100819B74 /* Info.plist */,
+				F1D97ECC21CC1D4100819B74 /* FancyGeo.swift */,
+			);
+			path = fancygeo;
+			sourceTree = "<group>";
+		};
+		F1D97ECE21CC1D4100819B74 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1D97ED621CC1D4100819B74 /* fancygeo.framework */,
+				F1D97ED821CC1D4100819B74 /* fancygeoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F1D97ED021CC1D4100819B74 /* fancygeoTests */ = {
+			isa = PBXGroup;
+			children = (
+				F1D97ED121CC1D4100819B74 /* fancygeoTests.swift */,
+				F1D97ED221CC1D4100819B74 /* Info.plist */,
+			);
+			path = fancygeoTests;
+			sourceTree = "<group>";
+		};
+		F1EC9DC121DDC4F8003BE727 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F1EC9DC621DDC4F9003BE727 /* FancyGeo.framework */,
+				F1EC9DC821DDC4F9003BE727 /* FancyGeoTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F1D97E8F21CC1C0F00819B74 /* FancyGeoDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1D97EB821CC1C1000819B74 /* Build configuration list for PBXNativeTarget "FancyGeoDemo" */;
+			buildPhases = (
+				CA6F74FE7BC83827857565D7 /* [CP] Check Pods Manifest.lock */,
+				F1D97E8C21CC1C0F00819B74 /* Sources */,
+				F1D97E8D21CC1C0F00819B74 /* Frameworks */,
+				F1D97E8E21CC1C0F00819B74 /* Resources */,
+				F048FF36C84AF30575D43792 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FancyGeoDemo;
+			productName = FancyGeoDemo;
+			productReference = F1D97E9021CC1C0F00819B74 /* FancyGeoDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F1D97EA321CC1C1000819B74 /* FancyGeoDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1D97EBB21CC1C1000819B74 /* Build configuration list for PBXNativeTarget "FancyGeoDemoTests" */;
+			buildPhases = (
+				F1D97EA021CC1C1000819B74 /* Sources */,
+				F1D97EA121CC1C1000819B74 /* Frameworks */,
+				F1D97EA221CC1C1000819B74 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1D97EA621CC1C1000819B74 /* PBXTargetDependency */,
+			);
+			name = FancyGeoDemoTests;
+			productName = FancyGeoDemoTests;
+			productReference = F1D97EA421CC1C1000819B74 /* FancyGeoDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F1D97EAE21CC1C1000819B74 /* FancyGeoDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F1D97EBE21CC1C1000819B74 /* Build configuration list for PBXNativeTarget "FancyGeoDemoUITests" */;
+			buildPhases = (
+				F1D97EAB21CC1C1000819B74 /* Sources */,
+				F1D97EAC21CC1C1000819B74 /* Frameworks */,
+				F1D97EAD21CC1C1000819B74 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F1D97EB121CC1C1000819B74 /* PBXTargetDependency */,
+			);
+			name = FancyGeoDemoUITests;
+			productName = FancyGeoDemoUITests;
+			productReference = F1D97EAF21CC1C1000819B74 /* FancyGeoDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F1D97E8821CC1C0F00819B74 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Osei Fortune";
+				TargetAttributes = {
+					F1D97E8F21CC1C0F00819B74 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					F1D97EA321CC1C1000819B74 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = F1D97E8F21CC1C0F00819B74;
+					};
+					F1D97EAE21CC1C1000819B74 = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = F1D97E8F21CC1C0F00819B74;
+					};
+				};
+			};
+			buildConfigurationList = F1D97E8B21CC1C0F00819B74 /* Build configuration list for PBXProject "FancyGeoDemo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F1D97E8721CC1C0F00819B74;
+			productRefGroup = F1D97E9121CC1C0F00819B74 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = F1EC9DC121DDC4F8003BE727 /* Products */;
+					ProjectRef = F1EC9DC021DDC4F8003BE727 /* FancyGeo.xcodeproj */;
+				},
+				{
+					ProductGroup = F1D97ECE21CC1D4100819B74 /* Products */;
+					ProjectRef = F1D97ECD21CC1D4100819B74 /* fancygeo.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				F1D97E8F21CC1C0F00819B74 /* FancyGeoDemo */,
+				F1D97EA321CC1C1000819B74 /* FancyGeoDemoTests */,
+				F1D97EAE21CC1C1000819B74 /* FancyGeoDemoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		F1D97ED621CC1D4100819B74 /* fancygeo.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = fancygeo.framework;
+			remoteRef = F1D97ED521CC1D4100819B74 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F1D97ED821CC1D4100819B74 /* fancygeoTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = fancygeoTests.xctest;
+			remoteRef = F1D97ED721CC1D4100819B74 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F1EC9DC621DDC4F9003BE727 /* FancyGeo.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = FancyGeo.framework;
+			remoteRef = F1EC9DC521DDC4F9003BE727 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		F1EC9DC821DDC4F9003BE727 /* FancyGeoTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = FancyGeoTests.xctest;
+			remoteRef = F1EC9DC721DDC4F9003BE727 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F1D97E8E21CC1C0F00819B74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1D97E9E21CC1C1000819B74 /* LaunchScreen.storyboard in Resources */,
+				F1D97E9B21CC1C1000819B74 /* Assets.xcassets in Resources */,
+				F1D97E9921CC1C0F00819B74 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1D97EA221CC1C1000819B74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1D97EAD21CC1C1000819B74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CA6F74FE7BC83827857565D7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FancyGeoDemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F048FF36C84AF30575D43792 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-FancyGeoDemo/Pods-FancyGeoDemo-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FancyGeoDemo/Pods-FancyGeoDemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F1D97E8C21CC1C0F00819B74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1D97E9621CC1C0F00819B74 /* fa.swift in Sources */,
+				F1D97E9421CC1C0F00819B74 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1D97EA021CC1C1000819B74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1D97EA921CC1C1000819B74 /* FancyGeoDemoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F1D97EAB21CC1C1000819B74 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F1D97EB421CC1C1000819B74 /* FancyGeoDemoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F1D97EA621CC1C1000819B74 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1D97E8F21CC1C0F00819B74 /* FancyGeoDemo */;
+			targetProxy = F1D97EA521CC1C1000819B74 /* PBXContainerItemProxy */;
+		};
+		F1D97EB121CC1C1000819B74 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F1D97E8F21CC1C0F00819B74 /* FancyGeoDemo */;
+			targetProxy = F1D97EB021CC1C1000819B74 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F1D97E9721CC1C0F00819B74 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1D97E9821CC1C0F00819B74 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F1D97E9C21CC1C1000819B74 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F1D97E9D21CC1C1000819B74 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F1D97EB621CC1C1000819B74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F1D97EB721CC1C1000819B74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F1D97EB921CC1C1000819B74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E30ED0908D52C57833BB5215 /* Pods-FancyGeoDemo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = FancyGeoDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.triniwiz.FancyGeoDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F1D97EBA21CC1C1000819B74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1DC09721FC5AA2B2CBFD7448 /* Pods-FancyGeoDemo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = FancyGeoDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.triniwiz.FancyGeoDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F1D97EBC21CC1C1000819B74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FancyGeoDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.triniwiz.FancyGeoDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FancyGeoDemo.app/FancyGeoDemo";
+			};
+			name = Debug;
+		};
+		F1D97EBD21CC1C1000819B74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FancyGeoDemoTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.triniwiz.FancyGeoDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FancyGeoDemo.app/FancyGeoDemo";
+			};
+			name = Release;
+		};
+		F1D97EBF21CC1C1000819B74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FancyGeoDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.triniwiz.FancyGeoDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FancyGeoDemo;
+			};
+			name = Debug;
+		};
+		F1D97EC021CC1C1000819B74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = FancyGeoDemoUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.github.triniwiz.FancyGeoDemoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FancyGeoDemo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F1D97E8B21CC1C0F00819B74 /* Build configuration list for PBXProject "FancyGeoDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1D97EB621CC1C1000819B74 /* Debug */,
+				F1D97EB721CC1C1000819B74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1D97EB821CC1C1000819B74 /* Build configuration list for PBXNativeTarget "FancyGeoDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1D97EB921CC1C1000819B74 /* Debug */,
+				F1D97EBA21CC1C1000819B74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1D97EBB21CC1C1000819B74 /* Build configuration list for PBXNativeTarget "FancyGeoDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1D97EBC21CC1C1000819B74 /* Debug */,
+				F1D97EBD21CC1C1000819B74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F1D97EBE21CC1C1000819B74 /* Build configuration list for PBXNativeTarget "FancyGeoDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F1D97EBF21CC1C1000819B74 /* Debug */,
+				F1D97EC021CC1C1000819B74 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F1D97E8821CC1C0F00819B74 /* Project object */;
+}
