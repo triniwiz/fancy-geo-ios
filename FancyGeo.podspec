@@ -1,8 +1,9 @@
 Pod::Spec.new do |s|
 
-
   s.name         = "FancyGeo"
+
   s.version      = "0.0.1"
+
   s.summary      = "A Fancy GeoLocation library"
 
   s.homepage     = "https://github.com/triniwiz/fancy-geo-ios"
