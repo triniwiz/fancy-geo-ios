@@ -29,6 +29,7 @@
     
     @objc(FancyGeo)
     public class FancyGeo : NSObject, CLLocationManagerDelegate {
+        private static let GEO_TRANSITION_TYPE = "type"
         private static var manager: CLLocationManager?
         private var isGettingCurrentLocation: Bool = false
         typealias Codable = Encodable & Decodable
@@ -42,6 +43,7 @@
         private static let PREFIX = "_fancy_geo_"
         private static var instance: FancyGeo?
         public static var onMessageReceivedListener: ((_ fence: String ) -> Void)?
+        
         private static func isActive() -> Bool {
             return UIApplication.shared.applicationState == .active
         }
@@ -357,7 +359,6 @@
             manager.distanceFilter = kCLDistanceFilterNone
             manager.desiredAccuracy =  kCLLocationAccuracyBest
             manager.startUpdatingLocation()
-            
         }
         
         @objc public func createFenceCircle(id: String?, transition: FenceTransition, notification: FenceNotification?, loiteringDelay: Int, points: Array<Double>,  radius: Double) -> Void{
@@ -480,7 +481,7 @@
             }
         }
         
-        func createNotification(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        func createNotification(_ manager: CLLocationManager, action: String ,region: CLRegion) {
             let center =  UNUserNotificationCenter.current()
             if(defaults != nil){
                 let fenceJson = getFence(id: region.identifier)
@@ -490,10 +491,14 @@
                     case "circle":
                         let circle = CircleFence.fromString(json: fenceJson!)
                         if(circle?.notification != nil){
+                            var extraInfo: [AnyHashable:Any] = [:]
+                            extraInfo[FancyGeo.GEO_TRANSITION_TYPE] = action
                             let notification = circle?.notification
                             let content = UNMutableNotificationContent()
                             content.title = notification!.title
                             content.body = notification!.body
+                            content.sound = UNNotificationSound.default
+                            content.userInfo = extraInfo
                             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
                             let request = UNNotificationRequest(identifier: String(notification!.id), content: content, trigger: trigger)
                             center.add(request) { (error) in
@@ -541,11 +546,11 @@
         
         
         public func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-            createNotification(manager, didExitRegion: region)
+            createNotification(manager, action: "exit", region: region)
         }
         
         public func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-            createNotification(manager, didExitRegion: region)
+            createNotification(manager, action: "enter" , region: region)
         }
         
         public func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
