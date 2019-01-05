@@ -11,7 +11,7 @@ import GoogleMaps
 import UserNotifications
 import FancyGeo
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
@@ -19,18 +19,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         GMSServices.provideAPIKey("AIzaSyB8dp0LdcuD62yvkdJaQgujnKzlE9691N0")
-        FancyGeo.initNotificationsDelegate(delegate: self)
+        FancyGeo.initFancyGeo()
         return true
     }
 
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        FancyGeo.handleNotification(center: center, response: response)
-        completionHandler()
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-    completionHandler([.badge,.sound,.alert])
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        FancyGeo.handleNotificationLegacy(notification: notification)
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

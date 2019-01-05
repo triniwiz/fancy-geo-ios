@@ -28,7 +28,7 @@
     }
     
     @objc(FancyGeo)
-    public class FancyGeo : NSObject, CLLocationManagerDelegate {
+    public class FancyGeo : NSObject, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
         private static let GEO_TRANSITION_TYPE = "type"
         private static var manager: CLLocationManager?
         private var isGettingCurrentLocation: Bool = false
@@ -43,11 +43,44 @@
         private static let PREFIX = "_fancy_geo_"
         private static var instance: FancyGeo?
         public static var onMessageReceivedListener: ((_ fence: String ) -> Void)?
-        
+        private static var didRegisterUserNotificationSettingsObserver: NSObjectProtocol?
         private static func isActive() -> Bool {
             return UIApplication.shared.applicationState == .active
         }
         
+        @objc public static func handleNotificationLegacy(notification: UILocalNotification){
+            let id = notification.userInfo?["id"] as? String
+            let defaults = UserDefaults.init(suiteName: FancyGeo.GEO_LOCATION_DATA)
+            if defaults != nil {
+                let fences =  defaults?.dictionaryRepresentation() ?? [:]
+                for fence in fences {
+                    if(fence.key.starts(with: FancyGeo.PREFIX)){
+                        let type = getType(json: fence.value as! String)
+                        switch(type){
+                        case "circle":
+                            let circle = CircleFence.fromString(json: fence.value as! String)
+                            if circle != nil && circle?.notification != nil{
+                                let notification = circle?.notification
+                                let notificationId = String(notification!.id)
+                                if(id != nil && id!.elementsEqual(notificationId)){
+                                    FancyGeo.notificationTapped = fence.value as? String
+                                }
+                            }
+                            break
+                        default:
+                            return
+                        }
+                    }
+                }
+            }
+            
+            if(isActive() && notificationTapped != nil){
+                onMessageReceivedListener?(notificationTapped!)
+            }
+            
+        }
+        
+        @available(iOS 10.0, *)
         @objc public static func handleNotification(center: UNUserNotificationCenter , response: UNNotificationResponse){
             let id = response.notification.request.identifier
             let defaults = UserDefaults.init(suiteName: FancyGeo.GEO_LOCATION_DATA)
@@ -113,9 +146,12 @@
             }
         }
         
-        @objc public static func initNotificationsDelegate(delegate: UNUserNotificationCenterDelegate){
-            let center = UNUserNotificationCenter.current()
-            center.delegate = delegate
+        @objc public static func initFancyGeo(){
+            if #available(iOS 10.0, *){
+                let center = UNUserNotificationCenter.current()
+                center.delegate = sharedInstance()
+            }
+            
             if isActive() && notificationTapped != nil {
                 onMessageReceivedListener?(notificationTapped!)
             }
@@ -299,6 +335,7 @@
         }
         
         @objc public func requestNotificationsPermission(callback: @escaping (Bool,String?) -> Void){
+            if #available(iOS 10.0, *){
                 let center = UNUserNotificationCenter.current()
                 center.requestAuthorization(options: [.alert, .badge]) { (hasPermission, requestError) in
                     DispatchQueue.main.async {
@@ -309,27 +346,64 @@
                     }
                     }
                 }
+            }else {
+                let notificationCenter = NotificationCenter.default
+               FancyGeo.didRegisterUserNotificationSettingsObserver =  notificationCenter.addObserver(forName: NSNotification.Name(rawValue: "didRegisterUserNotificationSettings"), object: nil, queue: OperationQueue.main) { (result) in
+                if(FancyGeo.didRegisterUserNotificationSettingsObserver != nil){
+                    notificationCenter.removeObserver(FancyGeo.didRegisterUserNotificationSettingsObserver!)
+                }
+                FancyGeo.didRegisterUserNotificationSettingsObserver = nil
+                let granted = result.userInfo?["message"] as? String
+                if(granted != nil){
+                    callback(granted!.elementsEqual("true"),nil)
+                }else{
+                    callback(false,nil)
+                }
+                }
+                let types = (UIApplication.shared.currentUserNotificationSettings?.types)!.rawValue | UIUserNotificationType.alert.rawValue | UIUserNotificationType.badge.rawValue | UIUserNotificationType.sound.rawValue;
+                let settings = UIUserNotificationSettings(types: UIUserNotificationType(rawValue: types), categories: nil)
+                UIApplication.shared.registerUserNotificationSettings(settings)
+            }
         }
         
         @objc public func hasNotificationsPermission(callback: @escaping (Bool, String?) -> Void){
+            if #available(iOS 10.0, *){
                 let center = UNUserNotificationCenter.current()
                 center.getNotificationSettings { (settings) in
                     DispatchQueue.main.async {
-                    switch(settings.authorizationStatus){
-                    case .authorized:
-                        callback(true,nil)
-                        break
-                    case .denied:
-                        callback(false,"Authorization Denied.")
-                        break
-                    case .notDetermined:
-                        callback(false,"Authorization Not Determined.")
-                        break
-                    case .provisional:
-                        break
-                    }
+                        switch(settings.authorizationStatus){
+                        case .authorized:
+                            callback(true,nil)
+                            break
+                        case .denied:
+                            callback(false,"Authorization Denied.")
+                            break
+                        case .notDetermined:
+                            callback(false,"Authorization Not Determined.")
+                            break
+                        case .provisional:
+                            break
+                        }
                     }
                 }
+            }else{
+                let types: UIUserNotificationType? =  UIApplication.shared.currentUserNotificationSettings?.types
+                let required = UIUserNotificationType.alert.rawValue | UIUserNotificationType.badge.rawValue | UIUserNotificationType.sound.rawValue
+                if types != nil {
+                    switch(types!.rawValue){
+                    case required:
+                         callback(true, nil)
+                        break
+                    default:
+                         callback(false, "Authorization Denied.")
+                        break
+                    }
+                }else{
+                    callback(false, "Authorization Denied.")
+                }
+            //let settings = UIUserNotificationSettings()
+                //UIApplication.shared.registerUserNotificationSettings(<#T##notificationSettings: UIUserNotificationSettings##UIUserNotificationSettings#>)
+            }
         }
         
         @objc public func requestPermission(always: Bool, callback : ((_ hasPermission: Bool, _ error: String?) -> Void)?){
@@ -482,7 +556,6 @@
         }
         
         func createNotification(_ manager: CLLocationManager, action: String ,region: CLRegion) {
-            let center =  UNUserNotificationCenter.current()
             if(defaults != nil){
                 let fenceJson = getFence(id: region.identifier)
                 if(fenceJson != nil){
@@ -491,20 +564,35 @@
                     case "circle":
                         let circle = CircleFence.fromString(json: fenceJson!)
                         if(circle?.notification != nil){
-                            var extraInfo: [AnyHashable:Any] = [:]
-                            extraInfo[FancyGeo.GEO_TRANSITION_TYPE] = action
-                            let notification = circle?.notification
-                            let content = UNMutableNotificationContent()
-                            content.title = notification!.title
-                            content.body = notification!.body
-                            content.sound = UNNotificationSound.default
-                            content.userInfo = extraInfo
-                            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
-                            let request = UNNotificationRequest(identifier: String(notification!.id), content: content, trigger: trigger)
-                            center.add(request) { (error) in
-                                if(error != nil){
-                                    print("Notification Error " + (error?.localizedDescription)!)
+                            if #available(iOS 10.0, *){
+                                let center =  UNUserNotificationCenter.current()
+                                var extraInfo: [AnyHashable:Any] = [:]
+                                extraInfo[FancyGeo.GEO_TRANSITION_TYPE] = action
+                                let notification = circle?.notification
+                                let content = UNMutableNotificationContent()
+                                content.title = notification!.title
+                                content.body = notification!.body
+                                content.sound = UNNotificationSound.default()
+                                content.userInfo = extraInfo
+                                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2, repeats: false)
+                                let request = UNNotificationRequest(identifier: String(notification!.id), content: content, trigger: trigger)
+                                center.add(request) { (error) in
+                                    if(error != nil){
+                                        print("Notification Error " + (error?.localizedDescription)!)
+                                    }
                                 }
+                            }else{
+                                let notification = circle?.notification
+                                var extraInfo: [AnyHashable:Any] = [:]
+                                extraInfo["id"] = String(notification!.id)
+                                extraInfo[FancyGeo.GEO_TRANSITION_TYPE] = action
+                                let legacyNotification = UILocalNotification()
+                                legacyNotification.alertTitle = notification!.title
+                                legacyNotification.alertBody = notification!.body
+                                legacyNotification.soundName =  UILocalNotificationDefaultSoundName
+                                legacyNotification.userInfo = extraInfo
+                                legacyNotification.fireDate = Date()
+                                UIApplication.shared.scheduleLocalNotification(legacyNotification)
                             }
                         }
                         break;
@@ -514,6 +602,18 @@
                 }
             }
         }
+        
+        @available(iOS 10.0, *)
+        public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+            FancyGeo.handleNotification(center: center, response: response)
+            completionHandler()
+        }
+        
+        @available(iOS 10.0, *)
+       public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+            completionHandler([.badge,.sound,.alert])
+        }
+        
         
         public func locationManager(_ manager: CLLocationManager, didStartMonitoringFor region: CLRegion) {
             let requestCallback =  FancyGeo.callbacks[region.identifier]

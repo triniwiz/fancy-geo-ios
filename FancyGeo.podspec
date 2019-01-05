@@ -23,4 +23,6 @@ Pod::Spec.new do |s|
 
   s.frameworks = "CoreLocation", "UserNotifications"
 
+  s.swift_version = '4.0'
+
 end
