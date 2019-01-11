@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
   s.name         = "FancyGeo"
 
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
 
   s.summary      = "A Fancy GeoLocation library"
 
