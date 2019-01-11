@@ -108,7 +108,7 @@
             }
             
             if(isActive() && notificationTapped != nil){
-               onMessageReceivedListener?(notificationTapped!)
+                onMessageReceivedListener?(notificationTapped!)
             }
         }
         
@@ -119,7 +119,7 @@
                 self.always = always
             }
         }
-    
+        
         @objc public enum FenceTransition: Int, Codable{
             case ENTER
             case DWELL
@@ -315,7 +315,6 @@
                 }
             }
             
-            
             @objc public static func fromString (json: String) -> CircleFence? {
                 let decoder = JSONDecoder()
                 do{
@@ -339,26 +338,26 @@
                 let center = UNUserNotificationCenter.current()
                 center.requestAuthorization(options: [.alert, .badge]) { (hasPermission, requestError) in
                     DispatchQueue.main.async {
-                    if(requestError != nil){
-                        callback(false, requestError?.localizedDescription)
-                    }else{
-                        callback(hasPermission,nil)
-                    }
+                        if(requestError != nil){
+                            callback(false, requestError?.localizedDescription)
+                        }else{
+                            callback(hasPermission,nil)
+                        }
                     }
                 }
             }else {
                 let notificationCenter = NotificationCenter.default
-               FancyGeo.didRegisterUserNotificationSettingsObserver =  notificationCenter.addObserver(forName: NSNotification.Name(rawValue: "didRegisterUserNotificationSettings"), object: nil, queue: OperationQueue.main) { (result) in
-                if(FancyGeo.didRegisterUserNotificationSettingsObserver != nil){
-                    notificationCenter.removeObserver(FancyGeo.didRegisterUserNotificationSettingsObserver!)
-                }
-                FancyGeo.didRegisterUserNotificationSettingsObserver = nil
-                let granted = result.userInfo?["message"] as? String
-                if(granted != nil){
-                    callback(granted!.elementsEqual("true"),nil)
-                }else{
-                    callback(false,nil)
-                }
+                FancyGeo.didRegisterUserNotificationSettingsObserver =  notificationCenter.addObserver(forName: NSNotification.Name(rawValue: "didRegisterUserNotificationSettings"), object: nil, queue: OperationQueue.main) { (result) in
+                    if(FancyGeo.didRegisterUserNotificationSettingsObserver != nil){
+                        notificationCenter.removeObserver(FancyGeo.didRegisterUserNotificationSettingsObserver!)
+                    }
+                    FancyGeo.didRegisterUserNotificationSettingsObserver = nil
+                    let granted = result.userInfo?["message"] as? String
+                    if(granted != nil){
+                        callback(granted!.elementsEqual("true"),nil)
+                    }else{
+                        callback(false,nil)
+                    }
                 }
                 let types = (UIApplication.shared.currentUserNotificationSettings?.types)!.rawValue | UIUserNotificationType.alert.rawValue | UIUserNotificationType.badge.rawValue | UIUserNotificationType.sound.rawValue;
                 let settings = UIUserNotificationSettings(types: UIUserNotificationType(rawValue: types), categories: nil)
@@ -392,30 +391,30 @@
                 if types != nil {
                     switch(types!.rawValue){
                     case required:
-                         callback(true, nil)
+                        callback(true, nil)
                         break
                     default:
-                         callback(false, "Authorization Denied.")
+                        callback(false, "Authorization Denied.")
                         break
                     }
                 }else{
                     callback(false, "Authorization Denied.")
                 }
-            //let settings = UIUserNotificationSettings()
+                //let settings = UIUserNotificationSettings()
                 //UIApplication.shared.registerUserNotificationSettings(<#T##notificationSettings: UIUserNotificationSettings##UIUserNotificationSettings#>)
             }
         }
         
-        @objc public func requestPermission(always: Bool, callback : ((_ hasPermission: Bool, _ error: String?) -> Void)?){
+        @objc public static func requestPermission(always: Bool, callback : ((_ hasPermission: Bool, _ error: String?) -> Void)?){
             let manager = CLLocationManager()
             manager.fancyId = UUID.init().uuidString
             FancyGeo.managers[manager.fancyId!] = manager
             let permission = FancyPermission(always: always)
             permission.callBack = callback
             if(callback != nil){
-             FancyGeo.permissions[manager.fancyId!] = permission
+                FancyGeo.permissions[manager.fancyId!] = permission
             }
-            manager.delegate = self
+            manager.delegate = sharedInstance()
             
             if always {
                 manager.requestAlwaysAuthorization()
@@ -424,7 +423,7 @@
             }
         }
         
-        @objc public func hasPermission() -> Bool {
+        @objc public static func hasPermission() -> Bool {
             return CLLocationManager.authorizationStatus() == .authorizedAlways || CLLocationManager.authorizationStatus() == .authorizedWhenInUse
         }
         
@@ -610,7 +609,7 @@
         }
         
         @available(iOS 10.0, *)
-       public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        public func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
             completionHandler([.badge,.sound,.alert])
         }
         
