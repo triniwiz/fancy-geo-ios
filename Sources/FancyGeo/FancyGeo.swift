@@ -28,7 +28,7 @@
     }
     
     @objc(FancyGeo)
-    public class FancyGeo : NSObject, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
+   @objcMembers public class FancyGeo : NSObject, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
         private static let GEO_TRANSITION_TYPE = "type"
         private static var manager: CLLocationManager?
         private var isGettingCurrentLocation: Bool = false
