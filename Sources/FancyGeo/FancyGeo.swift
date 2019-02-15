@@ -28,7 +28,7 @@
     }
     
     @objc(FancyGeo)
-   @objcMembers public class FancyGeo : NSObject, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
+    @objcMembers public class FancyGeo : NSObject, CLLocationManagerDelegate, UNUserNotificationCenterDelegate {
         private static let GEO_TRANSITION_TYPE = "type"
         private static var manager: CLLocationManager?
         private var isGettingCurrentLocation: Bool = false
@@ -47,6 +47,10 @@
         private static func isActive() -> Bool {
             return UIApplication.shared.applicationState == .active
         }
+        public static let defaultGetLocationTimeout = 5 * 60 * 1000 // 5 minutes
+        public static let minRangeUpdate = 0.1 // 0 meters
+        public static let minTimeUpdate = 1 * 60 * 1000 // 1 minute
+        public static let fastestTimeUpdate = 5 * 1000 // 5 secs
         
         @objc public static func handleNotificationLegacy(notification: UILocalNotification){
             let id = notification.userInfo?["id"] as? String
@@ -130,6 +134,12 @@
             case ALL
         }
         
+        @objc public enum FancyLocationAccuracy: Int{
+            case any = 300
+            case high = 3
+
+        }
+        
         @objc public static func sharedInstance() -> FancyGeo {
             setUpInstance()
             return instance!
@@ -156,6 +166,7 @@
                 onMessageReceivedListener?(notificationTapped!)
             }
         }
+        
         
         @objc public class FenceNotification : NSObject, Codable {
             public var id: Int
@@ -188,6 +199,32 @@
             }
         }
         
+        @objc public class FancyLocationOptions: NSObject {
+            
+            public var desiredAccuracy: Int?
+            
+            
+            public var updateDistance: Int?
+            
+            
+            public var updateTime: Int?
+            
+            
+            public var  minimumUpdateTime: Int?
+            
+            
+            public var maximumAge: Int?
+            
+            
+            public var timeout: Int?
+            
+            public var allowsBackgroundLocationUpdates: Bool?
+            
+            public var pausesLocationUpdatesAutomatically: Bool?
+            
+            public var openSettingsIfLocationHasBeenDenied: Bool?
+        }
+        
         @objc public class FancyLocation: NSObject , Codable {
             public let coordinate: FancyCoordinate
             public let altitude: Double
@@ -205,6 +242,31 @@
                 speed = location.speed
                 let ts = Date.init(timeInterval: 0, since: location.timestamp).timeIntervalSince1970
                 timestamp = ts * 1000
+            }
+        }
+        
+        class FancyLocationDelegate: NSObject, CLLocationManagerDelegate {
+            public var listener: (_ location: FancyLocation?,_ error: String?) -> Void
+            public var options: FancyLocationOptions?
+            public init(options: FancyLocationOptions?,listener: @escaping (_ location: FancyLocation?,_ error: String?) -> Void) {
+                self.listener = listener
+                self.options = options
+            }
+            func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+                if(locations.first != nil && options != nil){
+                    let last = locations.first!
+                    let currentTime = Date().timeIntervalSince1970 * 1000
+                    let maxAge = (last.timestamp.timeIntervalSince1970 * 1000) +  Double(options!.maximumAge ?? 0)
+                    if(maxAge < currentTime){
+                        let loc = FancyLocation(location: last)
+                        listener(loc,nil)
+                        manager.stopUpdatingLocation()
+                    }
+                }
+            }
+            
+            func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+                listener(nil,error.localizedDescription)
             }
         }
         
@@ -427,11 +489,42 @@
             return CLLocationManager.authorizationStatus() == .authorizedAlways || CLLocationManager.authorizationStatus() == .authorizedWhenInUse
         }
         
-        @objc public func getCurrentLocation(listener: () -> Void){
+        private var locationDelegates : [String:FancyLocationDelegate] = [:]
+        
+        @objc public func getCurrentLocation(options: FancyLocationOptions? ,listener: @escaping (_ location: FancyLocation? , _ error: String?) -> Void){
             let manager = CLLocationManager()
-            manager.distanceFilter = kCLDistanceFilterNone
-            manager.desiredAccuracy =  kCLLocationAccuracyBest
-            manager.startUpdatingLocation()
+            manager.fancyId = UUID.init().uuidString
+            let delegate = FancyLocationDelegate.init(options: options, listener: listener)
+            locationDelegates[manager.fancyId!] = delegate
+            manager.delegate = delegate
+            if(options != nil){
+                if(options?.timeout == 0){
+                    let last = manager.location
+                    if(last != nil){
+                        if((options?.maximumAge) != nil){
+                            let currentTime = Date().timeIntervalSince1970 * 1000
+                            let maxAge = (last?.timestamp.timeIntervalSince1970 ?? 0 * 1000) +  Double(options?.maximumAge ?? 0)
+                            if(maxAge < currentTime){
+                                let loc = FancyLocation(location: last!)
+                                listener(loc,nil)
+                            }
+                        }
+                    }
+                }else{
+                    manager.distanceFilter = kCLDistanceFilterNone
+                    var accuracy = kCLLocationAccuracyBest
+                    if(options?.desiredAccuracy == FancyLocationAccuracy.any.rawValue){
+                        accuracy =  CLLocationAccuracy(FancyLocationAccuracy.any.rawValue)
+                    }
+                    manager.desiredAccuracy =  accuracy
+                    manager.distanceFilter = options?.updateTime != nil ? Double((options?.updateTime)!):  FancyGeo.minRangeUpdate
+                    if #available(iOS 9, *){
+                        manager.allowsBackgroundLocationUpdates = options?.allowsBackgroundLocationUpdates ?? false
+                    }
+                    manager.pausesLocationUpdatesAutomatically = options?.pausesLocationUpdatesAutomatically ?? false
+                    manager.startUpdatingLocation()
+                }
+            }
         }
         
         @objc public func createFenceCircle(id: String?, transition: FenceTransition, notification: FenceNotification?, loiteringDelay: Int, points: Array<Double>,  radius: Double) -> Void{
